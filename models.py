@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields
 
 from setup_db import db
+import hashlib
 
 
 class Movie(db.Model):
@@ -46,3 +47,23 @@ class Genre(db.Model):
 class GenreSchema(Schema):
     id = fields.Int()
     name = fields.Str()
+
+
+class User(db.Model):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50))
+    password = db.Column(db.String(50))
+    role = db.Column(db.String(20))
+
+    def get_hash(self):
+        return hashlib.md5(self.password.encode('utf-8')).hexdigest()
+
+
+class UserSchema(Schema):
+    id = fields.Int()
+    username = fields.Str()
+    password = fields.Str()
+    role = fields.Str()
+
+
