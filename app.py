@@ -52,4 +52,4 @@ app = create_app(Config())
 app.debug = True
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=10001, debug=True)
+    app.run(host="localhost", port=5000, debug=True)
