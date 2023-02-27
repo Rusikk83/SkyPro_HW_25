@@ -40,7 +40,7 @@ class MoviesView(Resource):
 
 @movie_ns.route('/<int:bid>')
 class MovieView(Resource):
-    @auth_admin
+    @auth_required
     def get(self, bid):
         b = db.session.query(Movie).get(bid)
         sm_d = MovieSchema().dump(b)
